@@ -1,23 +1,22 @@
 class Solution {
     boolean isPalindrome(String s) {
+        // code here
         
-        if(s==null || s.length() == 0){
+        if(s==null || s.length()==0){
             return true;
         }
-        // code here
-        Stack <Character> st= new Stack<>();
-        for(int i=0; i<s.length();i++){
-            st.push(s.charAt(i));
-        }
         
-        for(int i=0; i<s.length(); i++){
-            if(s.charAt(i) != st.pop()){
+        int i=0;
+        int j=s.length()-1;
+        
+        while(i<j){
+            if(s.charAt(i) != s.charAt(j)){
                 return false;
             }
+            i++;
+            j--;
         }
-        
         return true;
         
     }
-    
 }
