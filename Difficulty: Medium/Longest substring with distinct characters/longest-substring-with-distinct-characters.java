@@ -1,28 +1,28 @@
-import java.util.*;
+// User function Template for Java
 
 class Solution {
     public int longestUniqueSubstr(String s) {
-        if (s.length() == 0) {
-            return 0;
-        }
-
-        int maxCount = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            Set<Character> set = new HashSet<>();
-
-            for (int j = i; j < s.length(); j++) {
-                char current = s.charAt(j);
-
-                if (set.contains(current)) {
-                    break; 
-                }
-
-                set.add(current);
-                maxCount = Math.max(maxCount, j - i + 1);
+        // code here
+        // sliding window
+        int left =0 , right=0;
+        int maxcount =0;
+        
+        Set <Character> set = new HashSet<>();
+        
+        while(right < s.length()){
+            char curr = s.charAt(right);
+            
+            while(set.contains(curr)){
+                set.remove(s.charAt(left));
+                left++;
             }
+            
+            set.add(curr);
+            maxcount= Math.max(maxcount, right-left+1);
+            right ++;
+            
+            
         }
-
-        return maxCount;
+        return maxcount;
     }
 }
