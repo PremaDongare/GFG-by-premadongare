@@ -1,28 +1,42 @@
 class Solution {
-    public void setMatrixZeroes(int[][] mat) {
+    public void setMatrixZeroes(int[][] matrix) {
         // code here
-        int m = mat.length;  // row
-        int n = mat[0].length;
+        boolean firstRow = false, firstCol=false;
         
-        boolean [] row = new boolean[m];
-        boolean [] col = new boolean[n];
-        
-        for(int i=0; i<m; i++){
-            for(int j=0; j<n; j++){
-                if(mat[i][j] == 0){
-                    row[i]=true;
-                    col[j]=true;
+        // check if the first row or column are 0
+        for(int i=0; i<matrix.length; i++){
+            for(int j=0; j<matrix[0].length; j++){
+                if(matrix[i][j] == 0){
+                    if(i==0) firstRow = true;
+                    if(j==0) firstCol = true;
+                    
+                    matrix[0][j]=0;
+                    matrix[i][0]=0;
                 }
             }
         }
         
-        for(int i=0; i<m;i++){
-            for(int j=0; j<n; j++){
-                if(row[i] || col[j]){
-                    mat[i][j]=0;
+        // ignore the first R and C
+        
+        for(int i=1; i<matrix.length; i++){
+            for(int j=1; j<matrix[0].length;j++){
+                if(matrix[i][0] == 0 || matrix[0][j] ==0){
+                    matrix[i][j] =0;
                 }
             }
         }
         
+        // now go to first row
+        if(firstRow){
+            for(int j=0; j<matrix[0].length; j++){
+                matrix[0][j]=0;
+            }
+        }
+        // now go to first col
+        if (firstCol) {
+            for (int i = 0; i < matrix.length; i++) {
+                matrix[i][0] = 0;
     }
+}
+}
 }
