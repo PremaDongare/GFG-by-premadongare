@@ -1,23 +1,31 @@
 class Solution {
-    public List<int[]> mergeOverlap(int[][] arr) {
-        // Code here // Code here
-        Arrays.sort(arr,(a,b)-> Integer.compare(a[0],b[0]));
-        
-        List<int[]> res= new ArrayList<>();
-        res.add(new int []{arr[0][0], arr[0][1]});
-        
-        for(int i=1; i<arr.length; i++){
-            int[] last= res.get(res.size()-1);
-            int []curr = arr[i];
-            
-            if(curr[0]<= last[1]){ // mearg overlap step
-            last[1]=Math.max(last[1], curr[1]);
-                
-            }else{
-                res.add(new int[] {curr[0], curr[1]});
-            }
+    public ArrayList<int[]> mergeOverlap(int[][] arr) {
+        // Code here
+        ArrayList<int[]> result = new ArrayList<>();
+        if(arr.length == 0){
+            return result ;
         }
-        return res;
+        
+        Arrays.sort(arr, (a,b)-> a[0]- b[0]);
+        
+        
+        int[] newinterval = arr[0];
+        result.add(newinterval);
+        
+        for(int[] interval: arr){
+            
+            if(interval[0] <= newinterval[1]){
+                newinterval[1] = Math.max(newinterval[1], interval[1]);
+               
+            }
+            
+            else{
+                newinterval = interval;
+                result.add(newinterval);
+            }
+            
+        }
+        return result;
         
     }
 }
